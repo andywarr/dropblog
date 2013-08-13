@@ -1,4 +1,4 @@
 dropblog
 ========
 
-A blogging application powered by nodejs, dropbox and angularjs
+An infinite scroll blogging application powered by nodejs, dropbox and angularjs

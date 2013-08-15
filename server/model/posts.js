@@ -3,7 +3,7 @@ var fs = require('fs');
 var postsdir = __dirname + '/../posts/';
 
 function Posts() {
-  this.posts = [];  
+  this.posts = {posts:[]};  
 
   this.cachePosts();
 }
@@ -20,7 +20,7 @@ Posts.prototype.cachePosts = function() {
     var fileContent = fs.readFileSync(postsdir + files[i], 'utf8');
 
     // Push file info and content to feed object                          
-    this.posts.push({
+    this.posts.posts.push({
       title: files[i],
       created: fileStats.ctime,
       modified: fileStats.mtime,

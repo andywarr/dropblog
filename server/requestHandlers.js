@@ -1,8 +1,8 @@
 function posts(req, res, posts) {
   console.log("Request handler 'posts' was called.");
   
-  res.writeHead(200, {"Content-Type": "text/plain"});
-  res.write("Posts");
+  res.writeHead(200, {'Content-Type': 'application/json'});
+  res.write(JSON.stringify(posts.posts.posts));
   res.end();
 }
 

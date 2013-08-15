@@ -1,5 +1,0 @@
-function Model() {
-
-}
-
-export Model = Model;

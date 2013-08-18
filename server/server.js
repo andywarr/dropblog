@@ -2,18 +2,17 @@ var http = require('http');
 var sys = require('sys');
 var url = require('url');
 
-var ip = "127.0.0.1";
-var port = 4001;
-
-function Server(route, handle, posts) {
+function Server(route, handle, posts, ip, port) {
   this.route = route;
   this.handle = handle;
   this.posts = posts;
+  this.ip = ip;
+  this.port = port;
 }
 
 Server.prototype.start = function() {
-  http.createServer(this.handleReq.bind(this)).listen(port, ip);
-  sys.puts('Server Running on ' + ip + ":" + port);
+  http.createServer(this.handleReq.bind(this)).listen(this.port, this.ip);
+  sys.puts('Server Running on ' + this.ip + ":" + this.port);
 };
 
 Server.prototype.handleReq = function(req, res) {

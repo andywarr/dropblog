@@ -2,8 +2,8 @@ var http = require('http');
 var sys = require('sys');
 var url = require('url');
 
-function Server(route, handle, posts, ip, port) {
-  this.route = route;
+function Server(router, handle, posts, ip, port) {
+  this.router = router;
   this.handle = handle;
   this.posts = posts;
   this.ip = ip;
@@ -19,7 +19,7 @@ Server.prototype.handleReq = function(req, res) {
   var pathname = url.parse(req.url).pathname;
   console.log("Pathname: " + pathname);
 
-  this.route(this.handle, pathname, req, res, this.posts);
+  this.router.route(this.handle, pathname, req, res, this.posts);
 };
 
 exports.Server = Server;

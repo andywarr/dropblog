@@ -1,11 +1,17 @@
-function route(handle, pathname, req, res, posts) {
+var static = require('node-static');
+
+function Router() {
+  this.staticServer = new static.Server('../client');
+}
+
+Router.prototype.route = function(handle, pathname, req, res, posts) {
   console.log("Routing request for " + pathname);
   if (typeof handle[pathname] === 'function') {
     handle[pathname](req, res, posts);
   }
   else {
-    console.log("No request handlers found for " + pathname);
+    this.staticServer.serve(req, res);
   }
 }
 
-exports.route = route;
+exports.Router = Router;

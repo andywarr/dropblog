@@ -1,6 +1,6 @@
 var CONFIG = require('config').Server;
 var Server = require("./server").Server;
-var Router = require("./router");
+var Router = require("./router").Router;
 var requestHandlers = require("./requestHandlers");
 var Posts = require("./model/posts").Posts;
 
@@ -9,5 +9,5 @@ handle["/posts"] = requestHandlers.posts;
 
 var posts = new Posts();
 
-var server = new Server(Router.route, handle, posts, CONFIG.ip, CONFIG.port);
+var server = new Server(new Router, handle, posts, CONFIG.ip, CONFIG.port);
 server.start();

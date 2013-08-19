@@ -3,16 +3,22 @@ function posts(req, res, parsedURL, posts) {
 
   var index = parseInt(parsedURL.query.index, 10);
 
+  var n = parseInt(parsedURL.query.n, 10);
+
+  if (!n) {
+    n = 10;
+  }
+
   var startPos = 0;
   var endPos = posts.posts.posts.length;
 
   if (index) {
     startPos = index;
-    if (endPos > startPos + 10) {
-      endPos = startPos + 10;
+    if (endPos > startPos + n) {
+      endPos = startPos + n;
     }
   }
-  
+
   res.writeHead(200, {'Content-Type': 'application/json'});
   res.write(JSON.stringify(posts.posts.posts.slice(startPos, endPos + 1)));
   res.end();

@@ -39,7 +39,7 @@
           infinite-scroll-distance="3">
           <div class="post" ng-repeat="post in posts">
             <div class="post-title" ng-bind-html-unsafe="post.title"></div>
-            <div class="post-date" ng-bind-html-unsafe="formatDate(post.created, post.modified)"></div>
+            <div class="post-date" ng-bind-html-unsafe="formatDate(post.lastModified)"></div>
             <div class="post-content" ng-bind-html-unsafe="post.content"></div>
           </div>
           <div class="loading" ng-show='busy'>Loading data...</div>

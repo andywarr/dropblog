@@ -16,7 +16,7 @@ Posts.prototype.cachePosts = function() {
 
     // Get file info                                            
     var fileStats = fs.statSync(postsdir + files[i]);
-
+    
     // Get file content                                                   
     var fileContentMarkdown = fs.readFileSync(postsdir + files[i], 'utf8');
 
@@ -26,8 +26,7 @@ Posts.prototype.cachePosts = function() {
     // Push file info and content to feed object                          
     this.posts.posts.push({
       title: files[i],
-      created: fileStats.ctime,
-      modified: fileStats.mtime,
+      lastModified: fileStats.mtime,
       content: fileContentHTML
     });
   }

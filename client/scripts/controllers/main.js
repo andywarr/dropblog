@@ -5,23 +5,16 @@ angular.module('myApp', ['ngSanitize', 'infinite-scroll'])
     $scope.posts = [];
     $scope.busy = false;
     $scope.index = 0;
+    $scope.n = 10;
 
-    $scope.formatDate = function(c, m) {
-      var created = new Date(c);
-      var modified = new Date(m);
-      
-      if (modified > created) {
-        console.log("File has been modified");
+    $scope.formatDate = function(date) {
+      var lastModified = new Date(date);
 
-      }
-      else {
-        return "Created on " + created.format("dddd, mmmm dS, yyyy");
-      }
+      return "Last modified on " + lastModified.format("dddd, mmmm dS, yyyy");
     };
 
     $scope.getMoreContent = function() {
-      console.log($scope.index);
-      $scope.url = "/posts?index=" + $scope.index;
+      $scope.url = "/posts?index=" + $scope.index + "&n=" + $scope.n;
       $http.get($scope.url).success(function(data, status, headers, config) {
         if ($scope.busy) return;
         $scope.busy = true;

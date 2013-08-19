@@ -16,10 +16,9 @@ Server.prototype.start = function() {
 };
 
 Server.prototype.handleReq = function(req, res) {
-  var pathname = url.parse(req.url).pathname;
-  console.log("Pathname: " + pathname);
+  var parsedURL = url.parse(req.url);
 
-  this.router.route(this.handle, pathname, req, res, this.posts);
+  this.router.route(this.handle, parsedURL, req, res, this.posts);
 };
 
 exports.Server = Server;

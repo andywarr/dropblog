@@ -3,6 +3,8 @@ function posts(req, res, parsedURL, posts) {
 
   var index = parseInt(parsedURL.query.index, 10);
 
+  console.log(parsedURL.query.index);
+
   var n = parseInt(parsedURL.query.n, 10);
 
   if (!n) {
@@ -11,7 +13,7 @@ function posts(req, res, parsedURL, posts) {
 
   var startPos = 0;
   var endPos = posts.posts.posts.length;
-
+  
   if (index) {
     startPos = index;
     if (endPos > startPos + n) {

@@ -16,7 +16,7 @@ Server.prototype.start = function() {
 };
 
 Server.prototype.handleReq = function(req, res) {
-  var parsedURL = url.parse(req.url);
+  var parsedURL = url.parse(req.url, true);
 
   this.router.route(this.handle, parsedURL, req, res, this.posts);
 };

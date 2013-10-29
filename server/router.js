@@ -10,6 +10,7 @@ Router.prototype.route = function(handle, parsedURL, req, res, posts) {
     handle[parsedURL.pathname](req, res, parsedURL, posts);
   }
   else {
+    console.log("HERE");
     this.staticServer.serve(req, res);
   }
 }

@@ -21,6 +21,10 @@ body {
     letter-spacing: -1px;
 }
 
+img {
+  width: 100%;
+}
+
 .post {
   border-top: 1px solid #CCC;
   margin-bottom: 25px;

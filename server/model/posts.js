@@ -4,6 +4,11 @@ var path = require('path');
 
 var postsdir = __dirname + '/../posts/';
 
+var getExtension = function(filename) {
+  var ext = path.extname(filename||'').split('.');
+  return ext[ext.length - 1];
+};
+
 function Posts() {
   this.posts = {posts:[]};  
 
@@ -11,26 +16,33 @@ function Posts() {
 }
 
 Posts.prototype.cachePosts = function() {
-  var files = fs.readdirSync(postsdir);
+  var dirs = fs.readdirSync(postsdir);
 
-  for (var i = 0; i < files.length; i++) {
+  for (var i = 0; i < dirs.length; i++) {
 
-    if (path.extname(files[i]) == '') {
-      // Get file info                                            
-      var fileStats = fs.statSync(postsdir + files[i]);
+    var dir = dirs[i] + '/';
+    var files = fs.readdirSync(postsdir + dirs[i]);
+
+    for (var j = 0; j < files.length; j++) {
+        
+      if (getExtension(files[j]) === "md") {        
+
+        // Get file info                                           
+        var fileStats = fs.statSync(postsdir + dir + files[j]);
     
-      // Get file content                                               
-      var fileContentMarkdown = fs.readFileSync(postsdir + files[i], 'utf8');
+        // Get file content                                               
+        var fileContentMarkdown = fs.readFileSync(postsdir + dir + files[j], 'utf8');
 
-      // Convert from markdown to html
-      var fileContentHTML = marked(fileContentMarkdown);
+        // Convert from markdown to html
+        var fileContentHTML = marked(fileContentMarkdown);
 
-      // Push file info and content to feed object             
-      this.posts.posts.push({
-        title: files[i],
-        lastModified: fileStats.mtime,
-        content: fileContentHTML
-      });
+        // Push file info and content to feed object             
+        this.posts.posts.push({
+          title: dir,
+          lastModified: fileStats.mtime,
+          content: fileContentHTML
+        });
+      }
     }
   }
 };
